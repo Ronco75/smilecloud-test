@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תצוגת משולש וזוויותיו</title>
+    <link rel="stylesheet" href="display.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <strong>שגיאה:</strong> לא נמצאו נתוני משולש. אנא חזור לעמוד הקלט והזן נקודות.
+        </div>
+
+        <div id="triangleDisplay" style="display: none;">
+            <div class="canvas-container">
+                <canvas id="triangleCanvas" width="800" height="800"></canvas>
+            </div>
+
+            <div class="info-panel">
+                <div class="coordinates-info">
+                    <div class="point-info">
+                        <div class="point-label">נקודה A</div>
+                        <div class="coordinates" id="pointA-coords"></div>
+                    </div>
+                    <div class="point-info">
+                        <div class="point-label">נקודה B</div>
+                        <div class="coordinates" id="pointB-coords"></div>
+                    </div>
+                    <div class="point-info">
+                        <div class="point-label">נקודה C</div>
+                        <div class="coordinates" id="pointC-coords"></div>
+                    </div>
+                </div>
+
+                <div class="angles-info">
+                    <div class="angles-title">זוויות המשולש</div>
+                    <div class="angles-grid">
+                        <div class="angle-item">
+                            <div class="angle-label">זווית A</div>
+                            <div class="angle-value" id="angleA"></div>
+                        </div>
+                        <div class="angle-item">
+                            <div class="angle-label">זווית B</div>
+                            <div class="angle-value" id="angleB"></div>
+                        </div>
+                        <div class="angle-item">
+                            <div class="angle-label">זווית C</div>
+                            <div class="angle-value" id="angleC"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="back-button" onclick="goBack()">חזור לעמוד הקלט</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

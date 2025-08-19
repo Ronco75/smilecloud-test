@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת משולש - עמוד קלט</title>
+    <link rel="stylesheet" href="Input.css">
+</head>
+<body>
+    <div class="container">
+        <h1>יצירת משולש</h1>
+        <div class="subtitle">
+            הזן שלוש נקודות ליצירת המשולש<br>
+            כל נקודה מורכבת מקואורדינטות X ו-Y
+        </div>
+        
+        <div class="points-container">
+            <div class="point-group">
+                <div class="point-label">נקודה A</div>
+                <div class="coordinate-inputs">
+                    <div class="input-group">
+                        <label class="input-label">X</label>
+                        <input type="number" id="point1-x" placeholder="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Y</label>
+                        <input type="number" id="point1-y" placeholder="0" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="point-group">
+                <div class="point-label">נקודה B</div>
+                <div class="coordinate-inputs">
+                    <div class="input-group">
+                        <label class="input-label">X</label>
+                        <input type="number" id="point2-x" placeholder="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Y</label>
+                        <input type="number" id="point2-y" placeholder="0" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="point-group">
+                <div class="point-label">נקודה C</div>
+                <div class="coordinate-inputs">
+                    <div class="input-group">
+                        <label class="input-label">X</label>
+                        <input type="number" id="point3-x" placeholder="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Y</label>
+                        <input type="number" id="point3-y" placeholder="0" step="0.1">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="create-button" onclick="createTriangle()">
+            הצג משולש
+        </button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
