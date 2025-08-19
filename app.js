@@ -148,34 +148,66 @@ function displayAngles(angles, scaledPoints) {
     drawAngleLabel(scaledPoints[2], scaledPoints[0], scaledPoints[1], angles[2], arcRadius + 15);
 }
 
-function drawAngleArc(vertex, point1, point2, radius, color) {
-    const angle1 = Math.atan2(point1.y - vertex.y, point1.x - vertex.x);
-    const angle2 = Math.atan2(point2.y - vertex.y, point2.x - vertex.x);
-    
-    ctx.beginPath();
-    ctx.arc(vertex.x, vertex.y, radius, angle1, angle2);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.stroke();
+function norm(a){ return (a+2*Math.PI)%(2*Math.PI); }
+function minorArc(a1,a2){
+  a1 = norm(a1); a2 = norm(a2);
+  let delta = norm(a2 - a1);
+  if (delta > Math.PI) {
+    const tmp = a1; a1 = a2; a2 = tmp;
+    delta = 2*Math.PI - delta;
+  }
+  return { start:a1, delta };
 }
 
-function drawAngleLabel(vertex, point1, point2, angleValue, labelRadius) {
-    const angle1 = Math.atan2(point1.y - vertex.y, point1.x - vertex.x);
-    const angle2 = Math.atan2(point2.y - vertex.y, point2.x - vertex.x);
-    let midAngle = (angle1 + angle2) / 2;
-    
-    if (Math.abs(angle2 - angle1) > Math.PI) {
-        midAngle += Math.PI;
-    }
-    
-    const labelX = vertex.x + Math.cos(midAngle) * labelRadius;
-    const labelY = vertex.y + Math.sin(midAngle) * labelRadius;
-    
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 14px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText(angleValue.toFixed(1) + '°', labelX, labelY + 5);
+function drawAngleArc(vertex, p1, p2, r, color){
+  const a1 = Math.atan2(p1.y-vertex.y, p1.x-vertex.x);
+  const a2 = Math.atan2(p2.y-vertex.y, p2.x-vertex.x);
+  const {start, delta} = minorArc(a1,a2);
+  ctx.beginPath();
+  ctx.arc(vertex.x, vertex.y, r, start, start+delta, false);
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
 }
+
+function drawAngleLabel(vertex, p1, p2, deg, rLabel){
+  const a1 = Math.atan2(p1.y-vertex.y, p1.x-vertex.x);
+  const a2 = Math.atan2(p2.y-vertex.y, p2.x-vertex.x);
+  const {start, delta} = minorArc(a1,a2);
+  const mid = start + delta/2;                           
+  const x = vertex.x + Math.cos(mid)*rLabel;
+  const y = vertex.y + Math.sin(mid)*rLabel;
+  ctx.fillStyle = '#333'; ctx.font = 'bold 14px Arial'; ctx.textAlign='center';
+  ctx.fillText(deg.toFixed(1)+'°', x, y+5);
+}
+
+
+// function drawAngleArc(vertex, point1, point2, radius, color) {
+//     const angle1 = Math.atan2(point1.y - vertex.y, point1.x - vertex.x);
+//     const angle2 = Math.atan2(point2.y - vertex.y, point2.x - vertex.x);
+    
+//     ctx.beginPath();
+//     ctx.arc(vertex.x, vertex.y, radius, angle1, angle2);
+//     ctx.strokeStyle = color;
+//     ctx.lineWidth = 2;
+//     ctx.stroke();
+// }
+
+// function drawAngleLabel(vertex, point1, point2, angleValue, labelRadius) {
+//     const angle1 = Math.atan2(point1.y - vertex.y, point1.x - vertex.x);
+//     const angle2 = Math.atan2(point2.y - vertex.y, point2.x - vertex.x);
+//     let midAngle = (angle1 + angle2) / 2;
+    
+//     if (Math.abs(angle2 - angle1) > Math.PI) {
+//         midAngle += Math.PI;
+//     }
+    
+//     const labelX = vertex.x + Math.cos(midAngle) * labelRadius;
+//     const labelY = vertex.y + Math.sin(midAngle) * labelRadius;
+    
+//     ctx.fillStyle = '#333';
+//     ctx.font = 'bold 14px Arial';
+//     ctx.textAlign = 'center';
+//     ctx.fillText(angleValue.toFixed(1) + '°', labelX, labelY + 5);
+// }
 
 function updateInfoPanel(points, angles) {
     document.getElementById('pointA-coords').textContent = `(${points[0].x}, ${points[0].y})`;
