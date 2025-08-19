@@ -115,6 +115,10 @@ function drawTriangle(points) {
     });
 }
 
+function distance(p1, p2) {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+}
+
 function calculateAngles(points) {
     const a = distance(points[1], points[2]);
     const b = distance(points[0], points[2]); 
@@ -129,10 +133,6 @@ function calculateAngles(points) {
         angleB * 180 / Math.PI,
         angleC * 180 / Math.PI
     ];
-}
-
-function distance(p1, p2) {
-    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 }
 
 function displayAngles(angles, scaledPoints) {
